@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "left": {
+    "id": 2
+  },
+  "right": {
+    "id": 3,
+    "left": null,
+    "right": {
+      "id": 5
+    }
+  }
+}
