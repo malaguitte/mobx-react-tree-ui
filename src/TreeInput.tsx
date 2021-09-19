@@ -94,8 +94,20 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         });
     }
 
-    onChangeTree = () => {
-        console.log("onchanged");
+    onChangeTreeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        try {
+            const text = event?.target?.value;
+            if (text) {
+                this.setState({
+                    treeText: text
+                });
+                const treeNodeFormat: BinTreeNode = JSON.parse(text);
+                this.props.onChange(treeNodeFormat);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+        
     }
 
     render() {
@@ -115,7 +127,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                     rows={20} 
                     cols={120} 
                     value={this.state.treeText} 
-                    onChange={this.onChangeTree}
+                    onChange={(event) => this.onChangeTreeText(event)}
                     placeholder="Your tree structure will be here..."
                 >
                 </textarea>
