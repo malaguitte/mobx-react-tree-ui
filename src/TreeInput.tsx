@@ -54,6 +54,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
             // In order to display the JSON nicely for the user, we call `prettyPrint` here.
             treeText: prettyPrint(tree)
         });
+        this.props.onChange(tree);
 
         // After you implement parseArrayToTree above, comment the below code
         // const treeNodeFormat: BinTreeNode = JSON.parse(this.state.treeText);
@@ -93,6 +94,10 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         });
     }
 
+    onChangeTree = () => {
+        console.log("onchanged");
+    }
+
     render() {
         return (
             <div>
@@ -106,7 +111,14 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                 <br/>
                 <button onClick={this.loadAndReadFile}>Fetch</button><br /><br />
                 <p>Tree Text</p>
-                <textarea rows={20} cols={120} value={this.state.treeText}></textarea>
+                <textarea 
+                    rows={20} 
+                    cols={120} 
+                    value={this.state.treeText} 
+                    onChange={this.onChangeTree}
+                    placeholder="Your tree structure will be here..."
+                >
+                </textarea>
 
             </div>
         )

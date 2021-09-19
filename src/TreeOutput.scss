@@ -1,14 +1,21 @@
-.treeNode{
-    // fill me in
+.treeNode {
+    border: 1px solid #ccc;
+	padding: 5px 10px;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid cadetblue;
+    margin: 2px;
 }
 
-.treeNode > .nodeId{
+.treeNode > .nodeId {
     font-weight: bold;
 }
 .treeNode > .nodeChildren{
-    //fill me in
+	border: 1px solid orange;
+	display: inline-block;
 }
 
-.nodeChildren > .treeNode{
-    
+.nodeChildren > .treeNode {
+    float: left; 
+	padding: 20px 5px 0 5px;
 }
