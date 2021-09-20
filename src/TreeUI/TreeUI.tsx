@@ -1,6 +1,6 @@
 import React from "react";
 import "./TreeUI.scss";
-import { BinTreeNode } from "./TreeNode";
+import { BinTreeNode } from "../TreeNode";
 
 export interface TreeOutputProps {
   data: BinTreeNode

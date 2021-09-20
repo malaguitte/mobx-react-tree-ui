@@ -1,9 +1,9 @@
 import * as React from "react";
 import { IAppState } from "./IAppState";
 import { observer } from "mobx-react";
-import { TreeInput } from "./TreeInput";
-import { TreeOutput } from "./TreeOutput";
-import TreeUI from "./TreeUI";
+import { TreeInput } from "./TreeInput/TreeInput";
+import { TreeOutput } from "./TreeOutput/TreeOutput";
+import TreeUI from "./TreeUI/TreeUI";
 import "./Body.scss"
 import { useAppStateContext } from "./AppState";
 import CONFIG from "./config/config";

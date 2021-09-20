@@ -1,7 +1,7 @@
 import * as React from "react";
-import { BinTreeNode } from "./TreeNode";
-import { prettyPrint, isValidRoot } from "./Utils";
-import CONFIG from "./config/config";
+import { BinTreeNode } from "../TreeNode";
+import { prettyPrint, isValidRoot } from "../Utils";
+import CONFIG from "../config/config";
 import "./TreeInput.scss";
 
 // Read config
