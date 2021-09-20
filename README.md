@@ -1,3 +1,5 @@
+For instructions on how to run the project please check the section [More Instructions](#more-instructions)
+
 ## Problem 1
 
 ### BinTreeNode changes
@@ -115,7 +117,7 @@ Created a new file [Utils.ts](./src/Utils.ts) to hold two small methods, `pretty
 ### Moved components to their own folders
 Created folders [TreeInput](./src/TreeInput/), [TreeOutput](./src/TreeOutput/) and [TreeUI](./src/TreeUI/)
 
-## Test
+## Tests
 Unfortunately, I did not have enough time to implement unit tests as of now, but if time wasn't an issue I'd have implemented some tests using [Jest](https://jestjs.io/).
 
 Some useful tests I thought about
@@ -127,8 +129,8 @@ Some useful tests I thought about
 5. Check whether we are keeping the latest successful tree when the next input is invalid
 ```
 
-## More instructions (e.g How to build)
-Please visit the [README-ORIGINAL.md](./README-ORIGINAL.md) file
+## More instructions
+For more instructions on how to run the project, please visit the [README-ORIGINAL.md](./README-ORIGINAL.md) file.
 
 ## Known Issues
 
