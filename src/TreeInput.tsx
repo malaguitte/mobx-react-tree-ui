@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BinTreeNode } from "./TreeNode";
 import { prettyPrint } from "./Utils";
+import "./TreeInput.scss";
 
 export interface TreeInputProps {
     onChange: (newTreeNode: BinTreeNode) => void
@@ -108,11 +109,10 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                 this.props.onChange(treeNodeFormat);
             }
         } catch (err) {
-            console.error("Invalid JSON, error: ", err);
+            console.error("Invalid input, error: ", err);
             this.setState({
-                errorMessage: "Invalid JSON"
+                errorMessage: "Invalid input"
             })
-            // TODO: Show JSON error on the UI, Add css
         }
         
     }
@@ -130,13 +130,13 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                 <br/>
                 <button onClick={this.loadAndReadFile}>Fetch</button><br /><br />
                 {this.state.errorMessage ? 
-                    <p className="input-error-message">{this.state.errorMessage}</p>
+                    <p className="errorMessage">{this.state.errorMessage}</p>
                     : null
                 }
                 <p>Tree Text</p>
                 <textarea 
                     rows={20} 
-                    cols={120} 
+                    cols={130} 
                     value={this.state.treeText} 
                     onChange={(event) => this.onChangeTreeText(event)}
                     placeholder="Your tree structure will be here..."
