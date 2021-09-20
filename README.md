@@ -66,6 +66,13 @@ Most of the changes to address Problem #1 are in this file.
 
     If the `isInputValue` is equals to `false`, we will display a new `<p>` element with a error message, the message can be customized in the file [config.ts](./src/config/config.ts).
     Also, when the input is invalid, we are currently applying some style to the border of the textarea to warn the user something in there is wrong.
+    Example:
+
+    ![Input validation example](./screenshots/InputError_Example.png)
+
+* Problem 2 working example:
+
+    ![Tree Output](./screenshots/TreeOutput_Example.png)
 
 
 ## Problem 3
@@ -81,13 +88,14 @@ A few steps I was considering:
 
 ## Extras
 
-### New Tree UI (TreeUI)
+### New Tree UI ([TreeUI](./src/TreeUI/TreeUI.tsx))
 I have created a new component named `TreeUI`, which displays the `BinNodeTree` created in a different way.
 I thought the "boxes" layout seemed a bit confused, so I decided to find another way on how to represent the tree.
 The implementation has been heavily inspired by some content I found online, more about it can be found here: [CodePen - Binary Tree MLM HTML](https://codepen.io/Gerim/pen/pWrqXG)
+![Tree UI](./screenshots/TreeUI_Example.png)
 
-### Mode JSON files to their own directory
-I moved the `.json` files from `src/` to a new folder `src/json-files/` to organize the structure better.
+### Moved JSON files to their own directory
+I moved the `.json` files from `src/` to a new folder [src/json-files/](./src/json-files/) to organize the structure better.
 
 ### Created a config file for the project
 Created a new folder `config` and the file [config.ts](./src/config/config.ts), where we can customize a few things from the project.
@@ -102,6 +110,9 @@ RENDER_TREE_BOX: false, // This represents whether you would like to render usin
 
 ### Utils.ts
 Created a new file [Utils.ts](./src/Utils.ts) to hold two small methods, `prettyPrint` and `isValidRoot`.
+
+### Moved components to their own folders
+Created folders [TreeInput](./src/TreeInput/), [TreeOutput](./src/TreeOutput/) and [TreeUI](./src/TreeUI/)
 
 ## Test
 Unfortunately, I did not have enough time to implement unit tests as of now, but if time wasn't an issue I'd have implemented some tests using [Jest](https://jestjs.io/).
