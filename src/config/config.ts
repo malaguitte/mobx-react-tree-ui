@@ -1,9 +1,9 @@
 const CONFIG =  {
     INPUT_ERROR_MESSAGE: "Your input is not a valid JSON. Please try again",
-    RENDER_TREE_UI: true,
-    RENDER_TREE_BOX: false,
-    TEXTAREA_LABEL: "Tree Text from config",
-    TEXTAREA_PLACEHOLDER: "Your tree structure will be here...",
+    RENDER_TREE_UI: true, // This represents whether you would like to render using the TreeUI component
+    RENDER_TREE_BOX: false, // This represents whether you would like to render using the TreeOutput component
+    TEXTAREA_LABEL: "Tree structure as JSON",
+    TEXTAREA_PLACEHOLDER: "Your tree structure goes here...",
     INPUT_LABEL: "Please select the source file for your tree",
     BUTTON_LABEL: "Fetch"
 };
