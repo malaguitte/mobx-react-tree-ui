@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BinTreeNode } from "./TreeNode";
-import { prettyPrint } from "./Utils";
+import { prettyPrint, isValidRoot } from "./Utils";
 import "./TreeInput.scss";
 
 export interface TreeInputProps {
@@ -49,15 +49,26 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
     }
 
     convert = () => {
-        // After you implement parseArrayToTree above, uncomment the below code
-        const treeArrayFormat: any[] = JSON.parse(this.state.treeInput);
-        const tree: BinTreeNode = this.parseArrayToTree(treeArrayFormat);
-        this.setState({
-            // In order to display the JSON nicely for the user, we call `prettyPrint` here.
-            treeText: prettyPrint(tree),
-            errorMessage: undefined // Remove previous errors
-        });
-        this.props.onChange(tree);
+        try {
+            // After you implement parseArrayToTree above, uncomment the below code
+            const treeArrayFormat: any[] = JSON.parse(this.state.treeInput);
+            const tree: BinTreeNode = this.parseArrayToTree(treeArrayFormat);
+            if (!isValidRoot(tree)) {
+                throw Error("Invalid input, no root found for the tree");
+            }
+            this.setState({
+                // In order to display the JSON nicely for the user, we call `prettyPrint` here.
+                treeText: prettyPrint(tree),
+                errorMessage: undefined // Remove previous errors
+            });
+            this.props.onChange(tree);
+        } catch (err) {
+            console.error("Invalid input, error: ", err);
+            this.setState({
+                errorMessage: "Invalid input"
+            })
+        }
+        
 
         // After you implement parseArrayToTree above, comment the below code
         // const treeNodeFormat: BinTreeNode = JSON.parse(this.state.treeText);

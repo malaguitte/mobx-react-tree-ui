@@ -11,3 +11,12 @@ export function prettyPrint(tree: BinTreeNode): string {
     const jsonTree = JSON.stringify(tree, undefined, 2);
     return jsonTree;
 }
+
+/**
+ * 
+ * @param tree 
+ * @returns 
+ */
+export function isValidRoot(tree: BinTreeNode): boolean {
+    return tree.id !== null;
+}
