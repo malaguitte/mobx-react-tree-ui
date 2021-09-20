@@ -1,10 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 import { IAppState } from "./IAppState";
 import { observer } from "mobx-react";
-import { TreeInput } from './TreeInput';
-import { TreeOutput } from './TreeOutput';
+import { TreeInput } from "./TreeInput";
+import { TreeOutput } from "./TreeOutput";
+import TreeUI from "./TreeUI";
 import "./Body.scss"
-import { useAppStateContext } from './AppState';
+import { useAppStateContext } from "./AppState";
 interface BodyProps {
     appState: IAppState
 }
@@ -20,7 +21,12 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
                 })
             }} />
             <div className="OutputContainer">
-                <TreeOutput treeNode={props.appState.treeNode} />
+                {/* <TreeOutput treeNode={props.appState.treeNode} /> */}
+                <div className="tree">
+                    <ul>
+                        <TreeUI data={props.appState.treeNode} />
+                    </ul>
+                </div>
             </div>
         </main>
     );
