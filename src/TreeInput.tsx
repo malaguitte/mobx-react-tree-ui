@@ -1,7 +1,13 @@
 import * as React from "react";
 import { BinTreeNode } from "./TreeNode";
 import { prettyPrint, isValidRoot } from "./Utils";
+import CONFIG from "./config/config";
 import "./TreeInput.scss";
+
+const INPUT_ERROR_MESSAGE = CONFIG.INPUT_ERROR_MESSAGE ?? "Invalid input.";
+const TEXTAREA_LABEL = CONFIG.TEXTAREA_LABEL ?? "Tree as json";
+const INPUT_LABEL = CONFIG.INPUT_LABEL ?? "Tree source";
+const BUTTON_LABEL = CONFIG.BUTTON_LABEL ?? "Fetch";
 
 export interface TreeInputProps {
     onChange: (newTreeNode: BinTreeNode) => void
@@ -11,7 +17,7 @@ interface TreeInputState {
     treeInput: string,
     fileInput?: File,
     treeText: string,
-    errorMessage?: string
+    isInputValid: boolean
 }
 
 export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
@@ -20,7 +26,8 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         this.state = {
             treeInput: "", // Represents the input as an array, e.g [1, [2], [3]]
             fileInput: undefined, // Represents the file loaded
-            treeText: "" // Represents the BinTreeNode as text
+            treeText: "", // Represents the BinTreeNode as text,
+            isInputValid: true // Represents whether the current input is valid, starts as valid.
         }
     }
 
@@ -59,14 +66,16 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
             this.setState({
                 // In order to display the JSON nicely for the user, we call `prettyPrint` here.
                 treeText: prettyPrint(tree),
-                errorMessage: undefined // Remove previous errors
+                isInputValid: true // Remove previous errors
             });
+
+            // Draw the tree again
             this.props.onChange(tree);
         } catch (err) {
             console.error("Invalid input, error: ", err);
             this.setState({
-                errorMessage: "Invalid input"
-            })
+                isInputValid: false
+            });
         }
         
 
@@ -114,7 +123,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
             if (text !== undefined) {
                 this.setState({
                     treeText: text,
-                    errorMessage: undefined // Remove previous errors
+                    isInputValid: true // Remove previous errors
                 });
                 const treeNodeFormat: BinTreeNode = JSON.parse(text);
                 this.props.onChange(treeNodeFormat);
@@ -122,8 +131,8 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         } catch (err) {
             console.error("Invalid input, error: ", err);
             this.setState({
-                errorMessage: "Invalid input"
-            })
+                isInputValid: false
+            });
         }
         
     }
@@ -131,7 +140,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
     render() {
         return (
             <div>
-                <label>Tree source</label><br/>
+                <label>{INPUT_LABEL}</label><br/>
                 <input 
                     type="file" 
                     name="treeInput" 
@@ -140,12 +149,9 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                 />
                 <br/>
                 <button onClick={this.loadAndReadFile}>Fetch</button><br /><br />
-                {this.state.errorMessage ? 
-                    <p className="errorMessage">{this.state.errorMessage}</p>
-                    : null
-                }
-                <p>Tree Text</p>
-                <textarea 
+                <p>{TEXTAREA_LABEL}</p>
+                <textarea
+                    className={this.state.isInputValid ? "" : "invalid"}
                     rows={20} 
                     cols={130} 
                     value={this.state.treeText} 
@@ -153,6 +159,11 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                     placeholder="Your tree structure will be here..."
                 >
                 </textarea>
+
+                {!this.state.isInputValid ? 
+                    <p className="errorMessage">{INPUT_ERROR_MESSAGE}</p>
+                    : null
+                }
 
             </div>
         )

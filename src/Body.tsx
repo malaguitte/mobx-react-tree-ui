@@ -6,6 +6,8 @@ import { TreeOutput } from "./TreeOutput";
 import TreeUI from "./TreeUI";
 import "./Body.scss"
 import { useAppStateContext } from "./AppState";
+import CONFIG from "./config/config";
+
 interface BodyProps {
     appState: IAppState
 }
@@ -20,14 +22,28 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
                     treeNode: newVal
                 })
             }} />
-            <div className="OutputContainer">
-                {/* <TreeOutput treeNode={props.appState.treeNode} /> */}
+
+            { CONFIG.RENDER_TREE_BOX
+                ?
+                <div className="OutputContainer">
+                    <TreeOutput treeNode={props.appState.treeNode} />
+                </div>
+                :
+                null
+            }
+
+            { CONFIG.RENDER_TREE_UI 
+                ? 
                 <div className="tree">
                     <ul>
                         <TreeUI data={props.appState.treeNode} />
                     </ul>
                 </div>
-            </div>
+                :
+                null
+            }
+            
+            
         </main>
     );
 })

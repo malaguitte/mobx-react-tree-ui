@@ -1,6 +1,7 @@
 import React from "react";
 import "./TreeUI.scss";
 import { BinTreeNode } from "./TreeNode";
+
 export interface TreeOutputProps {
   data: BinTreeNode
 }
@@ -8,20 +9,20 @@ export interface TreeOutputProps {
 export const TreeUI: React.FunctionComponent<TreeOutputProps> = (props) => {
   const { data } = props;
   if (!data) {
-    return <div className="treeNode"></div>;
+    return <div></div>;
   }
   
   const hasData = data.left !== undefined || data.right !== undefined;
 
   return (
     <li>
-      <a className="active" href="#">{data.id}</a>
+      <a href="#">{data.id}</a>
       {
         hasData 
         ?
           <ul>
-            { data.left ? <li> <TreeUI data={data.left} /> </li> : null }
-            { data.right ? <li> <TreeUI data={data.right} /> </li> : null }
+            { data.left ? <TreeUI data={data.left} /> : null }
+            { data.right ? <TreeUI data={data.right} /> : null }
           </ul> 
         : 
           null
