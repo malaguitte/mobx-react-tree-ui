@@ -92,6 +92,7 @@ A few steps I was considering:
 I have created a new component named `TreeUI`, which displays the `BinNodeTree` created in a different way.
 I thought the "boxes" layout seemed a bit confused, so I decided to find another way on how to represent the tree.
 The implementation has been heavily inspired by some content I found online, more about it can be found here: [CodePen - Binary Tree MLM HTML](https://codepen.io/Gerim/pen/pWrqXG)
+
 ![Tree UI](./screenshots/TreeUI_Example.png)
 
 ### Moved JSON files to their own directory
