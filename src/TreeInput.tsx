@@ -4,8 +4,10 @@ import { prettyPrint, isValidRoot } from "./Utils";
 import CONFIG from "./config/config";
 import "./TreeInput.scss";
 
+// Read config
 const INPUT_ERROR_MESSAGE = CONFIG.INPUT_ERROR_MESSAGE ?? "Invalid input.";
 const TEXTAREA_LABEL = CONFIG.TEXTAREA_LABEL ?? "Tree as json";
+const TEXTAREA_PLACEHOLDER = CONFIG.TEXTAREA_PLACEHOLDER ?? "Tree JSON...";
 const INPUT_LABEL = CONFIG.INPUT_LABEL ?? "Tree source";
 const BUTTON_LABEL = CONFIG.BUTTON_LABEL ?? "Fetch";
 
@@ -66,7 +68,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
             this.setState({
                 // In order to display the JSON nicely for the user, we call `prettyPrint` here.
                 treeText: prettyPrint(tree),
-                isInputValid: true // Remove previous errors
+                isInputValid: true // Input is now valid
             });
 
             // Draw the tree again
@@ -74,11 +76,9 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         } catch (err) {
             console.error("Invalid input, error: ", err);
             this.setState({
-                isInputValid: false
+                isInputValid: false // Input is invalid
             });
         }
-        
-
         // After you implement parseArrayToTree above, comment the below code
         // const treeNodeFormat: BinTreeNode = JSON.parse(this.state.treeText);
         // this.props.onChange(treeNodeFormat);
@@ -101,7 +101,6 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                     this.convert(); 
                 }
             }
-
             // Read file
             fileReader.readAsText(this.state.fileInput);
         }
@@ -123,7 +122,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
             if (text !== undefined) {
                 this.setState({
                     treeText: text,
-                    isInputValid: true // Remove previous errors
+                    isInputValid: true // Input is now valid
                 });
                 const treeNodeFormat: BinTreeNode = JSON.parse(text);
                 this.props.onChange(treeNodeFormat);
@@ -131,7 +130,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         } catch (err) {
             console.error("Invalid input, error: ", err);
             this.setState({
-                isInputValid: false
+                isInputValid: false // Input is invalid
             });
         }
         
@@ -144,11 +143,11 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                 <input 
                     type="file" 
                     name="treeInput" 
-                    accept=".json" 
+                    accept=".json"
                     onChange={(event) => this.changeFileHandler(event)}
                 />
                 <br/>
-                <button onClick={this.loadAndReadFile}>Fetch</button><br /><br />
+                <button onClick={this.loadAndReadFile}>{BUTTON_LABEL}</button><br /><br />
                 <p>{TEXTAREA_LABEL}</p>
                 <textarea
                     className={this.state.isInputValid ? "" : "invalid"}
@@ -156,7 +155,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                     cols={130} 
                     value={this.state.treeText} 
                     onChange={(event) => this.onChangeTreeText(event)}
-                    placeholder="Your tree structure will be here..."
+                    placeholder={TEXTAREA_PLACEHOLDER}
                 >
                 </textarea>
 

@@ -3,8 +3,9 @@ const CONFIG =  {
     RENDER_TREE_UI: true,
     RENDER_TREE_BOX: false,
     TEXTAREA_LABEL: "Tree Text from config",
+    TEXTAREA_PLACEHOLDER: "Your tree structure will be here...",
     INPUT_LABEL: "Please select the source file for your tree",
     BUTTON_LABEL: "Fetch"
-}
+};
 
 export default CONFIG;
