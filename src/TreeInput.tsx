@@ -57,6 +57,13 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         return new BinTreeNode(root, left, right);
     }
 
+    /**
+     * This method parse the `treeInput` value to a tree (if possible),
+     * and it updates the `treeText` with its new JSON representation.
+     * Once that's done we call the method that "draws" the Tree on the UI again.
+     * 
+     * In case the `treeInput` is not a valid Tree representation, we set the `isInputValid` to `false`
+     */
     convert = () => {
         try {
             // After you implement parseArrayToTree above, uncomment the below code
@@ -73,17 +80,20 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
 
             // Draw the tree again
             this.props.onChange(tree);
+            
         } catch (err) {
             console.error("Invalid input, error: ", err);
             this.setState({
                 isInputValid: false // Input is invalid
             });
         }
-        // After you implement parseArrayToTree above, comment the below code
-        // const treeNodeFormat: BinTreeNode = JSON.parse(this.state.treeText);
-        // this.props.onChange(treeNodeFormat);
     }
 
+    /**
+     * Reads the file set in the `fileInput` using the `FileReader` API.
+     * If the file is successfully read, we update the `treeInput` and call `convert`
+     * to complete the actions, e.g parse the data to a tree, update the textarea, and draw the tree again.
+     */
     loadAndReadFile = () => {
         // Check whether we have the file selected.
         if (this.state.fileInput) {
@@ -106,6 +116,10 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         }
     }
 
+    /**
+     * Reads the user's event, and sets the first file selected as the `fileInput` value.
+     * @param event: The user input event, e.g selecting a file
+     */
     changeFileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const filesArray = event?.target?.files;
         // If we have the files array, get the first item, otherwise undefined.
@@ -116,6 +130,14 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         });
     }
 
+    /**
+     * Callback watching the changes on the textarea element
+     * Tries to parse the current content of the HTML element, and transform it to a `BinTreeNode`
+     * if that works well, draws the new tree calling `this.props.onChange`
+     * 
+     * In case we are not able to parse the  text received, we set the `isInputValid` to `false`
+     * @param event 
+     */
     onChangeTreeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         try {
             const text = event?.target?.value;
@@ -125,7 +147,9 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                     isInputValid: true // Input is now valid
                 });
                 const treeNodeFormat: BinTreeNode = JSON.parse(text);
-                this.props.onChange(treeNodeFormat);
+                if (isValidRoot(treeNodeFormat)) {
+                    this.props.onChange(treeNodeFormat);
+                }
             }
         } catch (err) {
             console.error("Invalid input, error: ", err);
