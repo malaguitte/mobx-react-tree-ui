@@ -9,7 +9,8 @@ export interface TreeInputProps {
 interface TreeInputState {
     treeInput: string,
     fileInput?: File,
-    treeText: string
+    treeText: string,
+    errorMessage?: string
 }
 
 export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
@@ -52,7 +53,8 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
         const tree: BinTreeNode = this.parseArrayToTree(treeArrayFormat);
         this.setState({
             // In order to display the JSON nicely for the user, we call `prettyPrint` here.
-            treeText: prettyPrint(tree)
+            treeText: prettyPrint(tree),
+            errorMessage: undefined // Remove previous errors
         });
         this.props.onChange(tree);
 
@@ -97,15 +99,20 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
     onChangeTreeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         try {
             const text = event?.target?.value;
-            if (text) {
+            if (text !== undefined) {
                 this.setState({
-                    treeText: text
+                    treeText: text,
+                    errorMessage: undefined // Remove previous errors
                 });
                 const treeNodeFormat: BinTreeNode = JSON.parse(text);
                 this.props.onChange(treeNodeFormat);
             }
         } catch (err) {
-            console.error(err);
+            console.error("Invalid JSON, error: ", err);
+            this.setState({
+                errorMessage: "Invalid JSON"
+            })
+            // TODO: Show JSON error on the UI, Add css
         }
         
     }
@@ -122,6 +129,10 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                 />
                 <br/>
                 <button onClick={this.loadAndReadFile}>Fetch</button><br /><br />
+                {this.state.errorMessage ? 
+                    <p className="input-error-message">{this.state.errorMessage}</p>
+                    : null
+                }
                 <p>Tree Text</p>
                 <textarea 
                     rows={20} 
