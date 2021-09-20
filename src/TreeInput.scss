@@ -1,7 +1,14 @@
+$warningColor: #FF4E33;
+
 .errorMessage {
-    padding: 20px;
-    background-color: #f44336; /* Red */
-    // float: left;
-    color: white;
+    padding: 5px 0px;
+    color: $warningColor;
     margin-bottom: 15px;
+}
+
+textarea {
+    outline: none;
+    &.invalid {
+        border: 2px solid $warningColor;
+    }
 }
