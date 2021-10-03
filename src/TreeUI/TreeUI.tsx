@@ -2,27 +2,33 @@ import React from "react";
 import "./TreeUI.scss";
 import { BinTreeNode } from "../TreeNode";
 
-export interface TreeOutputProps {
-  data: BinTreeNode
+export interface TreeUIProps {
+  data: BinTreeNode,
+  rootSubTree?: BinTreeNode
 }
 
-export const TreeUI: React.FunctionComponent<TreeOutputProps> = (props) => {
-  const { data } = props;
+export const TreeUI: React.FunctionComponent<TreeUIProps> = (props) => {
+  const { data, rootSubTree } = props;
   if (!data) {
-    return <div></div>;
+    return <></>;
   }
-  
-  const hasData = data.left !== undefined || data.right !== undefined;
 
+  //Check whether the current node has children nodes
+  const hasChildren = data.left || data.right;
+  // Check whether the current node is the root of the subtree.
+  const isSubTreeRoot = rootSubTree === data;
+  // In case we found the subtree, we want to add the 'deepestNode' style class
+  const highlightClass = isSubTreeRoot ? "highlight" : "";
+  
   return (
-    <li>
-      <a href="#">{data.id}</a>
+    <li className={highlightClass}>
+      <a href="##">{data.id}</a>
       {
-        hasData 
+        hasChildren 
         ?
           <ul>
-            { data.left ? <TreeUI data={data.left} /> : null }
-            { data.right ? <TreeUI data={data.right} /> : null }
+            { data.left ? <TreeUI data={data.left} rootSubTree={rootSubTree} /> : null }
+            { data.right ? <TreeUI data={data.right} rootSubTree={rootSubTree} /> : null }
           </ul> 
         : 
           null

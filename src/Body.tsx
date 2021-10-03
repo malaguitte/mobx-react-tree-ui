@@ -47,7 +47,7 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
                 ? 
                 <div className="tree">
                     <ul>
-                        <TreeUI data={props.appState.treeNode} />
+                        <TreeUI data={props.appState.treeNode} rootSubTree={rootSubTree} />
                     </ul>
                 </div>
                 :
