@@ -4,8 +4,7 @@ import "./TreeOutput.scss"
 
 export interface TreeOutputProps {
     treeNode?: BinTreeNode | null,
-    maxDepth?: number,
-    currentDepth?: number
+    rootSubTree?: BinTreeNode // Represents the subtree we would like to highlight on the UI.
 }
 
 export const TreeOutput: React.FunctionComponent<TreeOutputProps> = (props) => {
@@ -15,19 +14,21 @@ export const TreeOutput: React.FunctionComponent<TreeOutputProps> = (props) => {
 
     // Whether the current node has children nodes or not.
     const hasChildren = props.treeNode?.left || props.treeNode?.right;
-    // In case we're in the last node, we want to add the 'deepestNode' style class
-    const nextLevel = props.currentDepth ? props.currentDepth + 1 : undefined;
-    // Considering the current depth of the tree, in case there's children we will add 1 more.
-    const deepestNodeStyle = props.currentDepth === props.maxDepth ? "deepestNode" : "";
+
+    // Check whether the current node is the root of the subtree.
+    const isSubTreeRoot = props.rootSubTree === props.treeNode;
+
+    // In case we found the subtree, we want to add the 'deepestNode' style class
+    const deepestNodeStyle = isSubTreeRoot ? "deepestNode" : "";
 
     return (
-        <div className="treeNode">
-            <div className={`nodeId ${deepestNodeStyle}`}>{props.treeNode.id}</div>
+        <div className={`treeNode ${deepestNodeStyle}`}>
+            <div className="nodeId">{props.treeNode.id}</div>
             {hasChildren 
                 ?
                 <div className="nodeChildren">
-                    <TreeOutput treeNode={props.treeNode?.left} maxDepth={props.maxDepth} currentDepth={nextLevel} />
-                    <TreeOutput treeNode={props.treeNode?.right} maxDepth={props.maxDepth} currentDepth={nextLevel} />
+                    <TreeOutput treeNode={props.treeNode?.left} rootSubTree={props.rootSubTree} />
+                    <TreeOutput treeNode={props.treeNode?.right} rootSubTree={props.rootSubTree} />
                 </div> 
                 :
                 null}

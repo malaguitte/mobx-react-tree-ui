@@ -8,7 +8,7 @@ import "./Body.scss"
 import { useAppStateContext } from "./AppState";
 import CONFIG from "./config/config";
 import { BinTreeNode } from "./TreeNode";
-import { getTreeMaxDepth } from "./Utils";
+import { getRootSmallestSubTree } from "./Utils";
 
 interface BodyProps {
     appState: IAppState
@@ -24,7 +24,8 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
         });
     }
 
-    const maxDepth: number = getTreeMaxDepth(props.appState.treeNode, 0);
+    // Finds the root of the smallest sub-tree
+    const rootSubTree = getRootSmallestSubTree(props.appState.treeNode);
 
     return (
         <main className="App-body">
@@ -35,7 +36,7 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
             { CONFIG.RENDER_TREE_BOX
                 ?
                 <div className="OutputContainer">
-                    <TreeOutput treeNode={props.appState.treeNode} maxDepth={maxDepth} currentDepth={1} />
+                    <TreeOutput treeNode={props.appState.treeNode} rootSubTree={rootSubTree} />
                 </div>
                 :
                 null

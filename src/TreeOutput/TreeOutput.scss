@@ -5,18 +5,13 @@
   text-align: center;
   border: 1px solid cadetblue;
   margin: 2px;
-  
+
   .nodeId {
     font-weight: bold;
   }
 
-  .deepestNode {
-    border: 2px solid green;
-  }
-  
   .nodeChildren {
     border: 1px solid orange;
-    // border: 2px solid green;
     display: inline-block;
 
     .treeNode {
@@ -26,4 +21,9 @@
 
   }
   
+}
+
+// If it is the deepest node, put the green border style in all of its nodes.
+.deepestNode * {
+    border: 2px solid green;
 }
