@@ -9,7 +9,7 @@ export interface TreeUIProps {
 
 export const TreeUI: React.FunctionComponent<TreeUIProps> = (props) => {
   const { data, rootSubTree } = props;
-  if (!data) {
+  if (!data || !data.id) {
     return <></>;
   }
 

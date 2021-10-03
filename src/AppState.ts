@@ -10,7 +10,8 @@ export class AppState implements IAppState {
 
     @observable bodyMessage = "Process the input text to a BinTreeNode";
 
-    @observable treeNode = new BinTreeNode("root", null, null);
+    // Starting with an empty tree, so we do not need to draw anything at first.
+    @observable treeNode = new BinTreeNode("", null, null);
 
     constructor() {
         makeObservable(this)
