@@ -7,31 +7,41 @@ import TreeUI from "./TreeUI/TreeUI";
 import "./Body.scss"
 import { useAppStateContext } from "./AppState";
 import CONFIG from "./config/config";
+import { BinTreeNode } from "./TreeNode";
+import { getTreeMaxDepth } from "./Utils";
 
 interface BodyProps {
     appState: IAppState
 }
 
 const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
+
+    // What to do once the TreeInput value changes.
+    const onTreeInputChange = (newVal: BinTreeNode) => {
+        props.appState.setState({
+            ...props.appState,
+            treeNode: newVal
+        });
+    }
+
+    const maxDepth: number = getTreeMaxDepth(props.appState.treeNode, 0);
+
     return (
         <main className="App-body">
             {props.appState!.bodyMessage}
-            <TreeInput onChange={(newVal) => {
-                props.appState.setState({
-                    ...props.appState,
-                    treeNode: newVal
-                })
-            }} />
+            <TreeInput onChange={onTreeInputChange} />
 
+            {/* Should render the "box" design */}
             { CONFIG.RENDER_TREE_BOX
                 ?
                 <div className="OutputContainer">
-                    <TreeOutput treeNode={props.appState.treeNode} />
+                    <TreeOutput treeNode={props.appState.treeNode} maxDepth={maxDepth} currentDepth={1} />
                 </div>
                 :
                 null
             }
 
+            {/* Should render the "tree" design */}
             { CONFIG.RENDER_TREE_UI 
                 ? 
                 <div className="tree">
@@ -42,7 +52,6 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
                 :
                 null
             }
-            
             
         </main>
     );

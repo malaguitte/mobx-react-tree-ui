@@ -9,9 +9,14 @@
   .nodeId {
     font-weight: bold;
   }
+
+  .deepestNode {
+    border: 2px solid green;
+  }
   
   .nodeChildren {
     border: 1px solid orange;
+    // border: 2px solid green;
     display: inline-block;
 
     .treeNode {

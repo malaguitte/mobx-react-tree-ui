@@ -1,4 +1,5 @@
 import { BinTreeNode } from "./TreeNode";
+import { BinTreeNodeWithDepth } from "./BinTreeNodeWithDepth";
 
 /**
  * This method formats a given tree object into a JSON string 
@@ -19,4 +20,17 @@ export function prettyPrint(tree: BinTreeNode): string {
  */
 export function hasValidRoot(tree: BinTreeNode): boolean {
     return tree.id !== null;
+}
+
+export function getTreeMaxDepth(tree: BinTreeNode | null, level: number = 0): number {
+    let maxLevel: number = level > 0 ? level : 0;
+    if (tree?.id !== null) {
+        if (tree?.left) {
+            maxLevel = getTreeMaxDepth(tree.left, ++level);
+        }
+        if (tree?.right) {
+            maxLevel = getTreeMaxDepth(tree.right, ++level);
+        }
+    }
+    return maxLevel;
 }
