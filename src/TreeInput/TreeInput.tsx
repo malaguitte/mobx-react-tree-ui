@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BinTreeNode } from "../TreeNode";
-import { prettyPrint, isValidRoot } from "../Utils";
+import { prettyPrint, hasValidRoot } from "../Utils";
 import CONFIG from "../config/config";
 import "./TreeInput.scss";
 
@@ -69,7 +69,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
             // After you implement parseArrayToTree above, uncomment the below code
             const treeArrayFormat: any[] = JSON.parse(this.state.treeInput);
             const tree: BinTreeNode = this.parseArrayToTree(treeArrayFormat);
-            if (!isValidRoot(tree)) {
+            if (!hasValidRoot(tree)) {
                 throw Error("Invalid input, no root found for the tree");
             }
             this.setState({
@@ -147,7 +147,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
                     isInputValid: true // Input is now valid
                 });
                 const treeNodeFormat: BinTreeNode = JSON.parse(text);
-                if (isValidRoot(treeNodeFormat)) {
+                if (hasValidRoot(treeNodeFormat)) {
                     this.props.onChange(treeNodeFormat);
                 }
             }

@@ -17,6 +17,6 @@ export function prettyPrint(tree: BinTreeNode): string {
  * @param {BinTreeNode} tree : The given tree that we would like to verify
  * @returns {boolean} Returns `true` when the tree's root is valid, false otherwise (root=null)
  */
-export function isValidRoot(tree: BinTreeNode): boolean {
+export function hasValidRoot(tree: BinTreeNode): boolean {
     return tree.id !== null;
 }

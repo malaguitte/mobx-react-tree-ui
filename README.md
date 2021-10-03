@@ -112,7 +112,7 @@ RENDER_TREE_BOX: false, // This represents whether you would like to render usin
 ```
 
 ### Utils.ts
-Created a new file [Utils.ts](./src/Utils.ts) to hold two small methods, `prettyPrint` and `isValidRoot`.
+Created a new file [Utils.ts](./src/Utils.ts) to hold two small methods, `prettyPrint` and `hasValidRoot`.
 
 ### Moved components to their own folders
 Created folders [TreeInput](./src/TreeInput/), [TreeOutput](./src/TreeOutput/) and [TreeUI](./src/TreeUI/)
