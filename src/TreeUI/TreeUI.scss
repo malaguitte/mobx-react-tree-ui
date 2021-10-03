@@ -2,7 +2,6 @@
 
 .tree ul {
 	padding-top: 20px; position: relative;
-
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -27,6 +26,7 @@
 	border-top: 1px solid #ccc;
 	width: 50%; height: 20px;
 }
+
 .tree li::after{
 	right: auto; left: 50%;
 	border-left: 1px solid #ccc;
@@ -46,6 +46,7 @@ right connector from last child*/
 .tree li:first-child::before, .tree li:last-child::after{
 	border: 0 none;
 }
+
 /*Adding back the vertical connector to the last nodes*/
 .tree li:last-child::before{
 	border-right: 1px solid #ccc;
@@ -53,6 +54,7 @@ right connector from last child*/
 	-webkit-border-radius: 0 5px 0 0;
 	-moz-border-radius: 0 5px 0 0;
 }
+
 .tree li:first-child::after{
 	border-radius: 5px 0 0 0;
 	-webkit-border-radius: 5px 0 0 0;

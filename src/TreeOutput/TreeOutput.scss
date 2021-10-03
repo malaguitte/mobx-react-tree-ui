@@ -1,21 +1,24 @@
 .treeNode {
-    border: 1px solid #ccc;
-	padding: 5px 10px;
-    display: inline-block;
-    text-align: center;
-    border: 1px solid cadetblue;
-    margin: 2px;
-}
-
-.treeNode > .nodeId {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid cadetblue;
+  margin: 2px;
+  
+  .nodeId {
     font-weight: bold;
-}
-.treeNode > .nodeChildren{
-	border: 1px solid orange;
-	display: inline-block;
-}
+  }
+  
+  .nodeChildren {
+    border: 1px solid orange;
+    display: inline-block;
 
-.nodeChildren > .treeNode {
-    float: left; 
-	padding: 20px 5px 0 5px;
+    .treeNode {
+      float: left; 
+      padding: 20px 5px 0 5px;
+    }
+
+  }
+  
 }
