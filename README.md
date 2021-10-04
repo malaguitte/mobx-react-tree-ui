@@ -1,5 +1,10 @@
 For instructions on how to run the project please check the section [More Instructions](#more-instructions)
 
+## TODO
+- Add screenshot to show Problem #3
+- Update the problem #3 section
+- Add a section to mention the unit tests added
+
 ## Problem 1
 
 ### BinTreeNode changes
