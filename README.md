@@ -83,15 +83,33 @@ Most of the changes to address Problem #1 are in this file.
 
 
 ## Problem 3
-Unfortunately, I did not manage to work on Problem #3 because of the time constraint; however, I have an idea on how that should be done, and I can explain more if needed.
-A few steps I was considering:
+The 3rd problem consisted in finding the smallest subtree with all the deepest nodes, once the subtree has been found we need to apply a different border to it. The style that will be used:
 ```
-1. We would need a method/algorithm that would receive the `BinNodeTree`, and be able to identify what's the deepest node of that tree.
-2. If that node is by itself the deepest node, it is the "easy" case, so we will need to "tag it", could add another property to the object, e.g `isDeepestNode: true`
-3. If the node is not the single deepest (e.g another node has the same depth), we will need to go up till we find the "common parent", and we can "tag" it and all its children.
-4. The UI components (TreeOutput & TreeUI) could use this new property (e.g `isDeepestNode`) to apply a new style (css class) for the nodes' borders where this property is true.
-5. Add a new css class to style the border to "2px solid green"
+border: 2px solid green;
 ```
+If the subtree has only a single element, it means that that node itself represents the subtree, if we have multiple nodes whose depths are equal to the max tree depth, the solution is the smallest subtree with these nodes.
+
+Within the [Utils.ts](./src/Utils.ts) file, I have added 2 methods to help identify the subtree, the methods are `findDepth` and `getRootSmallestSubTree`.
+
+`getRootSmallestSubTree` is the most important method here since it is the one which finds  the root of the smallest subtree, that means that given a `BinTreeNode` object, it is capable of finding where the deeepest nodes are.
+
+We then use the `getRootSmallestSubTree` in the [Body.tsx](./src/Body.tsx) file before calling the `TreeUI` or the `TreeOutput` components, since we need to tell these components which subtree they need to highlight.
+
+* `TreeUI` accepts a `rootSubTree` (optional) property as part of the `TreeUIProps`
+* `TreeOutput` accepts `rootSubTree` (optional) property as part of the `TreeOutputProps`
+
+Both components then use the same logic, we check whether the node being rendered is the `rootSubTree`, e.g
+```
+const isSubTreeRoot = props.rootSubTree === props.treeNode;
+```
+If that's the case we can dynamically add a CSS class to the element using a ternary operator, e.g
+```
+// In case we found the subtree, we want to add the 'deepestNode' style class
+const deepestNodeStyle = isSubTreeRoot ? "deepestNode" : "";
+// and then we can do the following:
+<div className={`treeNode ${deepestNodeStyle}`}>
+```
+The css class added (deepestNode in the example above) is the one which adds the '`border: 2px solid green;`' style to the subtree.
 
 ## Extras
 
@@ -117,7 +135,7 @@ RENDER_TREE_BOX: false, // This represents whether you would like to render usin
 ```
 
 ### Utils.ts
-Created a new file [Utils.ts](./src/Utils.ts) to hold two small methods, `prettyPrint` and `hasValidRoot`.
+Created a new file [Utils.ts](./src/Utils.ts) to hold some small methods, `prettyPrint`, `hasValidRoot`, `getRootSmallestSubTree`, `findDepth`.
 
 ### Moved components to their own folders
 Created folders [TreeInput](./src/TreeInput/), [TreeOutput](./src/TreeOutput/) and [TreeUI](./src/TreeUI/)
