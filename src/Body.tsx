@@ -33,7 +33,7 @@ const BodyRenderer: React.FunctionComponent<BodyProps> = observer((props) => {
             <TreeInput onChange={onTreeInputChange} />
 
             {/* Should render the "box" design */}
-            { CONFIG.RENDER_TREE_BOX
+            { CONFIG.RENDER_TREE_OUTPUT
                 ?
                 <div className="OutputContainer">
                     <TreeOutput treeNode={props.appState.treeNode} rootSubTree={rootSubTree} />

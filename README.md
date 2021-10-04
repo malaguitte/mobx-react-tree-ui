@@ -132,7 +132,7 @@ One nice example is that it is very easy to choose which design you would like t
 Within the [config.ts](./src/config/config.ts), you can change the values of the flags below and choose how you'd like the tree to appear in the UI
 ```
 RENDER_TREE_UI: true, // This represents whether you would like to render using the TreeUI component
-RENDER_TREE_BOX: false, // This represents whether you would like to render using the TreeOutput component
+RENDER_TREE_OUTPUT: false, // This represents whether you would like to render using the TreeOutput component
 ```
 
 ### Utils.ts
@@ -153,6 +153,9 @@ Test file for the [Utils.ts](src/Utils.ts) file, added simple tests to ensure th
 
 #### [TreeInput.test.tsx](./src/TreeInput/TreeInput.test.tsx)
 Test file for the [TreeInput.tsx](./src/TreeInput/TreeInput.tsx) component.
+
+#### [config.test.tsx](./src/config/config.test.tsx)
+Test file for the [config.ts](./src/config/config.ts) file.
 
 ## More instructions
 For more instructions on how to run the project, please visit the [README-ORIGINAL.md](./README-ORIGINAL.md) file.
