@@ -1,10 +1,5 @@
 For instructions on how to run the project please check the section [More Instructions](#more-instructions)
 
-## TODO
-- Add screenshot to show Problem #3
-- Update the problem #3 section
-- Add a section to mention the unit tests added
-
 ## Problem 1
 
 ### BinTreeNode changes
@@ -111,6 +106,13 @@ const deepestNodeStyle = isSubTreeRoot ? "deepestNode" : "";
 <div className={`treeNode ${deepestNodeStyle}`}>
 ```
 The css class added (deepestNode in the example above) is the one which adds the '`border: 2px solid green;`' style to the subtree.
+
+* Problem 3 working example with the `TreeOutput` component:
+
+    ![TreeOutput with Subtree](./screenshots/TreeOutput_Subtree_Example.png)
+
+* Problem 3 working example with the `TreeUI` component:
+    ![TreeUI with Subtree](./screenshots/TreeUI_Subtree_Example.png)
 
 ## Extras
 
