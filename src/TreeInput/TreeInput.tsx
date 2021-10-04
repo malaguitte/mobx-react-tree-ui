@@ -38,8 +38,8 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
      * @param arrayFormat [id, leftChild, rightChild] for example [1, [2], [3, null, [5]]]
      * @returns TreeNode format
      * */
-    parseArrayToTree(arrayFormat: any[]): BinTreeNode {
-        const root = arrayFormat[0] ?? null;
+    public parseArrayToTree(arrayFormat: any[]): BinTreeNode {
+        const root = arrayFormat[0] ? arrayFormat[0].toString() : "";
 
         // If any of the children nodes is an array
         // It means they are a sub-tree... 
@@ -64,7 +64,7 @@ export class TreeInput extends React.Component<TreeInputProps, TreeInputState>{
      * 
      * In case the `treeInput` is not a valid Tree representation, we set the `isInputValid` to `false`
      */
-    convert = () => {
+    public convert = () => {
         try {
             // After you implement parseArrayToTree above, uncomment the below code
             const treeArrayFormat: any[] = JSON.parse(this.state.treeInput);
