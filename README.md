@@ -100,6 +100,7 @@ We then use the `getRootSmallestSubTree` in the [Body.tsx](./src/Body.tsx) file 
 
 Both components then use the same logic, we check whether the node being rendered is the `rootSubTree`, e.g
 ```
+// Check whether the current node is the root of the subtree.
 const isSubTreeRoot = props.rootSubTree === props.treeNode;
 ```
 If that's the case we can dynamically add a CSS class to the element using a ternary operator, e.g
@@ -141,16 +142,17 @@ Created a new file [Utils.ts](./src/Utils.ts) to hold some small methods, `prett
 Created folders [TreeInput](./src/TreeInput/), [TreeOutput](./src/TreeOutput/) and [TreeUI](./src/TreeUI/)
 
 ## Tests
-Unfortunately, I did not have enough time to implement unit tests as of now, but if time wasn't an issue I'd have implemented some tests using [Jest](https://jestjs.io/).
+I have implemented a few unit tests to ensure that some core pieces of the application work as expected, it should also help other developers to spot problems that may come with updating the code.
+To run the tests locally please run the following command
+```
+$ yarn test
+```
 
-Some useful tests I thought about
-```
-1. Check whether we can convert the tree properly
-2. Check for cases where we should fail while converting the tree
-3. Check whether the flags in the config file are working as expected
-4. Check whether we're able to identify incorrect JSON as input
-5. Check whether we are keeping the latest successful tree when the next input is invalid
-```
+#### [Utils.test.tsx](src/Utils.test.tsx)
+Test file for the [Utils.ts](src/Utils.ts) file, added simple tests to ensure the helper methods work as expected.
+
+#### [TreeInput.test.tsx](./src/TreeInput/TreeInput.test.tsx)
+Test file for the [TreeInput.tsx](./src/TreeInput/TreeInput.tsx) component.
 
 ## More instructions
 For more instructions on how to run the project, please visit the [README-ORIGINAL.md](./README-ORIGINAL.md) file.
