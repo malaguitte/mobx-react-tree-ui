@@ -109,10 +109,11 @@ The css class added (deepestNode in the example above) is the one which adds the
 
 * Problem 3 working example with the `TreeOutput` component:
 
-    ![TreeOutput with Subtree](./screenshots/TreeOutput_Subtree_Example.png)
+    ![TreeOutput with Subtree](./screenshots/TreeOutput_SubTree_Example.png)
 
 * Problem 3 working example with the `TreeUI` component:
-    ![TreeUI with Subtree](./screenshots/TreeUI_Subtree_Example.png)
+
+    ![TreeUI with Subtree](./screenshots/TreeUI_SubTree_Example.png)
 
 ## Extras
 
